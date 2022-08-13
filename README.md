@@ -1,3 +1,7 @@
+Thanks to [＠Johannes Preis](https://github.com/jpreis)
+
+Check his Medium post [A lean terminal setup for doing more while typing less](https://medium.com/comsystoreply/a-lean-terminal-setup-for-doing-more-while-typing-less-b33c3e562f1b)
+    
 # Terminal Setup
 
 * **Shell:** zsh ([oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh))
