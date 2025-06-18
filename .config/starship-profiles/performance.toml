@@ -1,0 +1,82 @@
+# Performance-Focused Starship Configuration
+# Optimized for speed - disables slow modules
+
+command_timeout = 500
+scan_timeout = 10
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$python\
+$nodejs\
+$cmd_duration\
+$line_break\
+$character"""
+
+add_newline = true
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+
+[git_branch]
+style = "bold purple"
+only_attached = true
+
+[git_status]
+style = "bold red"
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+untracked = "?"
+modified = "!"
+staged = "+"
+deleted = "x"
+
+[python]
+symbol = "🐍 "
+format = "[$symbol$version]($style) "
+style = "yellow"
+detect_folders = []  # Don't scan folders
+
+[nodejs]
+symbol = "⬢ "
+format = "[$symbol$version]($style) "
+style = "green"
+detect_folders = []  # Don't scan folders
+
+[cmd_duration]
+min_time = 2000
+format = "[$duration]($style) "
+style = "yellow"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+# Disabled for performance
+[package]
+disabled = true
+
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[terraform]
+disabled = true
+
+[vagrant]
+disabled = true
+
+[nix_shell]
+disabled = true

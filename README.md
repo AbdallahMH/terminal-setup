@@ -7,11 +7,14 @@ A fast, modern terminal configuration for macOS featuring iTerm2 and Starship pr
 ## 🎯 Features
 
 - **Fast Startup**: No Oh-My-Zsh overhead, pure Zsh configuration
-- **Modern Prompt**: Starship with smart Git integration
-- **Developer Tools**: Pre-configured for Ruby, Node.js, Python, Docker, and more
+- **Modern Prompt**: Starship with emoji-based indicators and comprehensive language support
+- **Developer Tools**: Pre-configured for Ruby, Node.js, Python, Go, Java, Kotlin, Docker, and more
 - **Enhanced Commands**: Better `ls` (eza), `cat` (bat), fuzzy finding (fzf)
 - **Smart Navigation**: Autojump for quick directory switching
 - **Syntax Highlighting**: Real-time command highlighting in terminal
+- **Cloud Integration**: Support for AWS, Google Cloud, and Kubernetes
+- **Version Managers**: ASDF, rbenv, nvm, and pyenv support
+- **Security**: Sensitive data isolation via `.zshrc.local`
 
 ## 📦 Prerequisites
 
@@ -56,8 +59,9 @@ brew install \
 ### 3. Copy Configuration Files
 
 ```bash
-# Copy Zsh configuration
+# Copy Zsh configuration files
 cp .zshrc ~/.zshrc
+cp .zprofile ~/.zprofile
 
 # Copy Starship configuration
 mkdir -p ~/.config
@@ -68,6 +72,10 @@ cp com.googlecode.iterm2.plist ~/Library/Preferences/
 
 # Copy login silencer
 cp .hushlogin ~/
+
+# Create local configuration file for sensitive data (optional)
+cp .zshrc.local.example ~/.zshrc.local
+# Edit ~/.zshrc.local to add your API keys and machine-specific settings
 ```
 
 ### 4. Configure iTerm2

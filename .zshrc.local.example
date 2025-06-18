@@ -1,0 +1,72 @@
+# ~/.zshrc.local - Local Configuration Override Example
+# 
+# This file contains machine-specific or sensitive configurations
+# that should not be committed to version control.
+#
+# Copy this file to ~/.zshrc.local and customize as needed.
+# The .zshrc will automatically source ~/.zshrc.local if it exists.
+
+# ==============================================================================
+# API Keys and Secrets
+# ==============================================================================
+
+# OpenAI API Key
+# export OPENAI_API_KEY="your-api-key-here"
+
+# AWS Credentials (if not using AWS CLI config)
+# export AWS_ACCESS_KEY_ID="your-access-key"
+# export AWS_SECRET_ACCESS_KEY="your-secret-key"
+
+# GitHub Personal Access Token
+# export GITHUB_TOKEN="your-github-token"
+
+# ==============================================================================
+# Machine-Specific Paths
+# ==============================================================================
+
+# Custom tool installations
+# export PATH="$HOME/custom-tools/bin:$PATH"
+
+# Work-specific tools
+# export PATH="/opt/company-tools/bin:$PATH"
+
+# ==============================================================================
+# Environment-Specific Settings
+# ==============================================================================
+
+# Database URLs
+# export DATABASE_URL="postgresql://user:pass@localhost/dbname"
+
+# API Endpoints
+# export API_BASE_URL="https://api.example.com"
+
+# ==============================================================================
+# Personal Preferences
+# ==============================================================================
+
+# Custom aliases for this machine only
+# alias work="cd ~/Work/current-project"
+# alias vpn="sudo openconnect vpn.company.com"
+
+# Machine-specific functions
+# function deploy_prod() {
+#     echo "Deploying to production..."
+#     # Your deployment commands here
+# }
+
+# ==============================================================================
+# Tool Configurations
+# ==============================================================================
+
+# Ruby version for this machine
+# export RUBY_VERSION="3.2.0"
+
+# Node.js version
+# export NODE_VERSION="20.0.0"
+
+# Python virtual environment
+# export VIRTUAL_ENV="$HOME/venvs/myproject"
+
+# ==============================================================================
+# End of ~/.zshrc.local example
+# ==============================================================================

@@ -1,0 +1,38 @@
+# Minimal Starship Configuration
+# Fast and clean - only essentials
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$character"""
+
+add_newline = false
+
+[directory]
+truncation_length = 2
+truncate_to_repo = true
+format = "[$path]($style) "
+style = "cyan"
+
+[git_branch]
+format = "[$branch]($style) "
+style = "purple"
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "red"
+conflicted = "="
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+untracked = "?"
+stashed = "*"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+[character]
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
