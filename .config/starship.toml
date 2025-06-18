@@ -1,0 +1,179 @@
+# Starship Configuration - Developer Standard Setup
+# This is the most common configuration used by 80% of developers
+
+# Timeout for commands (increase for slow git repos)
+command_timeout = 1000
+
+# Add blank line between prompts (very popular)
+add_newline = true
+
+# Standard format (most common module order)
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$python\
+$nodejs\
+$rust\
+$ruby\
+$golang\
+$docker_context\
+$kubernetes\
+$aws\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$character"""
+
+# Directory settings (most common)
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+format = "[$path]($style) "
+truncation_symbol = "…/"
+
+# Directory substitutions
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"Developer" = " "
+
+# Git branch (standard settings)
+[git_branch]
+symbol = " "
+style = "bold purple"
+format = "on [$symbol$branch]($style) "
+
+# Git status (most used configuration)
+[git_status]
+style = "bold red"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇡${ahead_count}⇣${behind_count}"
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+# Command duration (show only if > 2 seconds)
+[cmd_duration]
+min_time = 2000
+style = "bold yellow"
+format = "took [$duration]($style) "
+
+# Character (most popular prompt symbols)
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vicmd_symbol = "[❮](bold green)"
+
+# Username (only show when needed)
+[username]
+show_always = false
+style_user = "bold blue"
+style_root = "bold red"
+format = "[$user]($style) "
+
+# Hostname (only show in SSH sessions)
+[hostname]
+ssh_only = true
+style = "bold green"
+format = "at [$hostname]($style) "
+
+# Python
+[python]
+symbol = " "
+style = "yellow bold"
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+# Node.js
+[nodejs]
+symbol = " "
+style = "green bold"
+format = "via [$symbol($version )]($style)"
+detect_extensions = ["js", "mjs", "cjs", "ts", "mts", "cts"]
+
+# Ruby (for Rails development)
+[ruby]
+symbol = " "
+style = "red bold"
+format = "via [$symbol($version )]($style)"
+detect_files = ["Gemfile", ".ruby-version"]
+detect_folders = ["app", "bin", "config", "db", "lib"]
+
+# Rust
+[rust]
+symbol = " "
+style = "red bold"
+format = "via [$symbol($version )]($style)"
+
+# Go
+[golang]
+symbol = " "
+style = "cyan bold"
+format = "via [$symbol($version )]($style)"
+
+# Docker
+[docker_context]
+symbol = " "
+style = "blue bold"
+format = "via [$symbol$context]($style) "
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+
+# Kubernetes (disabled by default for performance)
+[kubernetes]
+disabled = true
+symbol = "☸ "
+style = "cyan bold"
+format = 'on [$symbol$context( \($namespace\))]($style) '
+
+# AWS (disabled by default for performance)
+[aws]
+disabled = true
+symbol = "  "
+style = "yellow bold"
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+
+# Package version (disabled for performance)
+[package]
+disabled = true
+
+# Memory usage (disabled by default)
+[memory_usage]
+disabled = true
+symbol = " "
+
+# Time (disabled by default, enable if desired)
+[time]
+disabled = true
+style = "bold yellow"
+format = "at [$time]($style) "
+
+# Battery (disabled by default)
+[battery]
+disabled = true
+
+# Jobs
+[jobs]
+symbol = "✦"
+style = "bold blue"
+format = "[$symbol$number]($style) "
+
+# Custom modules can be added here
+# Example:
+# [custom.git_remote]
+# command = "git config --get remote.origin.url | sed 's/.*://;s/.git$//'"
+# when = "git rev-parse --git-dir 2> /dev/null"
+# format = "on [$output]($style) "
