@@ -1,0 +1,62 @@
+# SSH Configuration Template
+# Copy this file to ~/.ssh/config
+# Make sure to set proper permissions: chmod 600 ~/.ssh/config
+
+# Include OrbStack SSH config (if using OrbStack)
+# Include ~/.orbstack/ssh/config
+
+# ==============================================================================
+# GitHub Configuration
+# ==============================================================================
+Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  # Replace with your GitHub SSH key path
+  IdentityFile ~/.ssh/id_ed25519
+
+# ==============================================================================
+# GitLab Configuration (if needed)
+# ==============================================================================
+# Host gitlab.com
+#   AddKeysToAgent yes
+#   UseKeychain yes
+#   IdentityFile ~/.ssh/id_ed25519
+
+# ==============================================================================
+# Remote Server Examples
+# ==============================================================================
+
+# Example: Cloud server
+# Host my-server
+#   HostName 1.2.3.4
+#   User your-username
+#   IdentityFile ~/.ssh/your-server-key
+#   Port 22
+
+# Example: Server with custom settings
+# Host production
+#   HostName prod.example.com
+#   User deploy
+#   IdentityFile ~/.ssh/prod_key
+#   Port 2222
+#   ForwardAgent yes
+#   ServerAliveInterval 60
+#   ServerAliveCountMax 3
+
+# ==============================================================================
+# Global Defaults (applied to all hosts)
+# ==============================================================================
+Host *
+  # Add keys to ssh-agent automatically
+  AddKeysToAgent yes
+  # Use macOS keychain for SSH keys
+  UseKeychain yes
+  # Compress data for faster transfer
+  Compression yes
+  # Keep connections alive
+  ServerAliveInterval 60
+  ServerAliveCountMax 120
+  # Connection multiplexing for faster subsequent connections
+  ControlMaster auto
+  ControlPath ~/.ssh/sockets/%r@%h-%p
+  ControlPersist 600

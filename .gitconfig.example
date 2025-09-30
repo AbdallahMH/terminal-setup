@@ -1,0 +1,74 @@
+# Git Configuration Template
+# Copy this file to ~/.gitconfig and customize with your details
+
+[user]
+	name = Your Name
+	email = your.email@example.com
+	# Optional: GPG signing key for commit verification
+	# Get your key ID with: gpg --list-secret-keys --keyid-format=long
+	# signingkey = YOUR_GPG_KEY_ID
+
+[commit]
+	# Uncomment to sign all commits with your GPG key
+	# gpgsign = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[core]
+	# Handle line endings: input = convert CRLF to LF on commit
+	autocrlf = input
+	# Set your preferred editor (vim, nano, code --wait, etc.)
+	editor = vim
+	# Exclude file for patterns to ignore globally
+	excludesfile = ~/.gitignore_global
+
+[init]
+	# Default branch name for new repositories
+	defaultBranch = main
+
+[pull]
+	# Rebase instead of merge when pulling
+	rebase = false
+
+[push]
+	# Push current branch to upstream branch with same name
+	default = simple
+	# Automatically set up remote tracking
+	autoSetupRemote = true
+
+[alias]
+	# Useful shortcuts
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	visual = log --graph --oneline --decorate --all
+	# Show commits not yet pushed
+	unpushed = log @{u}..
+
+[diff]
+	# Better diff algorithm
+	algorithm = histogram
+
+[merge]
+	# Include original version in conflict markers
+	conflictstyle = diff3
+
+[fetch]
+	# Automatically prune deleted remote branches
+	prune = true
+
+[rebase]
+	# Automatically stash and pop when rebasing
+	autoStash = true
+
+# Uncomment if using GitHub CLI for authentication
+# [credential]
+# 	helper =
+# 	helper = /opt/homebrew/bin/gh auth git-credential
