@@ -1,0 +1,73 @@
+# Local configuration with sensitive data
+.zshrc.local
+
+# SSH keys and sensitive configurations
+.ssh/id_*
+.ssh/*.pem
+.ssh/*.key
+*.pem
+*.key
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.idea
+.vscode
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-workspace
+
+# Backup files
+*.backup
+*.bak
+*~
+
+# Credentials and tokens
+credentials.json
+token.json
+*.credentials
+
+# History files (keep these local)
+.zsh_history
+.bash_history
+.python_history
+.node_repl_history
+.mysql_history
+
+# Cache and compiled files
+.zcompdump*
+*.zwc
+__pycache__/
+*.py[cod]
+*$py.class

@@ -33,6 +33,16 @@ cd terminal-setup
 
 ### 2. Install Dependencies
 
+**Option A: Using Brewfile (Recommended)**
+
+Install all packages at once using the included Brewfile:
+
+```bash
+brew bundle install
+```
+
+**Option B: Manual Installation**
+
 ```bash
 # Install Starship prompt
 brew install starship
@@ -76,6 +86,19 @@ cp .hushlogin ~/
 # Create local configuration file for sensitive data (optional)
 cp .zshrc.local.example ~/.zshrc.local
 # Edit ~/.zshrc.local to add your API keys and machine-specific settings
+
+# Copy Git configuration template (optional)
+cp .gitconfig.example ~/.gitconfig
+# Edit ~/.gitconfig with your name, email, and GPG key
+
+# Copy SSH configuration template (optional)
+mkdir -p ~/.ssh
+cp .ssh_config.example ~/.ssh/config
+chmod 600 ~/.ssh/config
+# Edit ~/.ssh/config with your SSH keys and server settings
+
+# Copy asdf version manager configuration (optional)
+cp .tool-versions ~/
 ```
 
 ### 4. Configure iTerm2
