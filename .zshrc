@@ -153,17 +153,12 @@ if [[ $- == *i* ]]; then
     # Configuration
     alias zshcfg="code ~/.zshrc"
     alias zshsrc="source ~/.zshrc"
-    alias starshipconfig='${EDITOR:-vim} ~/.config/starship.toml'
     
     # Docker-related
-    alias d='docker'
     alias dc="docker-compose"
     alias dce="docker-compose exec"
     alias dr="dc run --rm rails bundle exec rails"  # Added --rm flag
     alias dcw="docker-compose exec web bash"
-    alias dps='docker ps'
-    alias dpsa='docker ps -a'
-    alias di='docker images'
     
     # Navigation
     alias ..="cd .."
@@ -178,7 +173,6 @@ if [[ $- == *i* ]]; then
     alias mv="mv -i"                     # Confirm before overwriting
     alias ll="ls -la"                    # Long list format
     alias la="ls -A"                     # Show hidden files
-    alias l='ls -CF'
     
     # Git shortcuts (minimal replacement for git plugin)
     alias g="git"
@@ -189,18 +183,38 @@ if [[ $- == *i* ]]; then
     alias gl="git pull"
     alias gco="git checkout"
     alias gd="git diff"
-    alias gb='git branch'
-    alias glog='git log --oneline --graph'
     
-    # Development aliases
-    alias dev='cd ~/Development'
-    alias reload='source ~/.zshrc'
-    alias zshconfig='${EDITOR:-vim} ~/.zshrc'
+    # --- Utility Functions ---
+    # Extract various archive types
+    extract() {
+        if [ -f $1 ] ; then
+            case $1 in
+                *.tar.bz2)   tar xjf $1     ;;
+                *.tar.gz)    tar xzf $1     ;;
+                *.bz2)       bunzip2 $1     ;;
+                *.rar)       unrar e $1     ;;
+                *.gz)        gunzip $1      ;;
+                *.tar)       tar xf $1      ;;
+                *.tbz2)      tar xjf $1     ;;
+                *.tgz)       tar xzf $1     ;;
+                *.zip)       unzip $1       ;;
+                *.Z)         uncompress $1  ;;
+                *.7z)        7z x $1        ;;
+                *)           echo "'$1' cannot be extracted via extract()" ;;
+            esac
+        else
+            echo "'$1' is not a valid file"
+        fi
+    }
+    
+    # Create directory and cd into it
+    mkcd() {
+        mkdir -p "$1" && cd "$1"
+    }
     
     # Starship Profile Switching
     starship-profile() {
-        local profile_dir="$HOME/Downloads/Learning/terminal-setup/.config/starship-profiles"
-        local config_dir="$HOME/.config"
+        local profile_dir="$HOME/.config/starship-profiles"
         
         case $1 in
             minimal)
@@ -257,64 +271,7 @@ if [[ $- == *i* ]]; then
     alias sp-dracula='starship-profile dracula'
     alias sp-default='starship-profile default'
     
-    # Enhanced ls with colors
-    if command -v eza &> /dev/null; then
-        alias ls='eza'
-        alias ll='eza -la'
-        alias la='eza -a'
-        alias lt='eza --tree'
-    fi
-    
-    # Better cat with syntax highlighting
-    if command -v bat &> /dev/null; then
-        alias cat='bat'
-        export BAT_THEME="Night-Owl"
-    fi
-    
-    # --- Utility Functions ---
-    # Extract various archive types
-    extract() {
-        if [ -f $1 ] ; then
-            case $1 in
-                *.tar.bz2)   tar xjf $1     ;;
-                *.tar.gz)    tar xzf $1     ;;
-                *.bz2)       bunzip2 $1     ;;
-                *.rar)       unrar e $1     ;;
-                *.gz)        gunzip $1      ;;
-                *.tar)       tar xf $1      ;;
-                *.tbz2)      tar xjf $1     ;;
-                *.tgz)       tar xzf $1     ;;
-                *.zip)       unzip $1       ;;
-                *.Z)         uncompress $1  ;;
-                *.7z)        7z x $1        ;;
-                *)           echo "'$1' cannot be extracted via extract()" ;;
-            esac
-        else
-            echo "'$1' is not a valid file"
-        fi
-    }
-    
-    # Create directory and cd into it
-    mkcd() {
-        mkdir -p "$1" && cd "$1"
-    }
-    
     # --- Third-party interactive tools ---
-    # Fuzzy Finder (fzf)
-    if command -v fzf &> /dev/null; then
-        # Set up fzf key bindings and fuzzy completion
-        eval "$(fzf --zsh)"
-        
-        # Use fd for fzf if available
-        if command -v fd &> /dev/null; then
-            export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-            export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-        fi
-        
-        # Better preview
-        export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-    fi
-    
     # thefuck command correction
     if command -v thefuck &> /dev/null; then
         eval $(thefuck --alias)
@@ -323,45 +280,6 @@ if [[ $- == *i* ]]; then
     # Autojump directory navigation
     if [[ -f "/opt/homebrew/etc/profile.d/autojump.sh" ]]; then
         . "/opt/homebrew/etc/profile.d/autojump.sh"
-    elif [[ -f "/usr/local/etc/profile.d/autojump.sh" ]]; then
-        . "/usr/local/etc/profile.d/autojump.sh"
-    fi
-    
-    # Ruby Version Manager (rbenv)
-    if command -v rbenv &> /dev/null; then
-        eval "$(rbenv init - zsh)"
-    fi
-    
-    # Node Version Manager (if using nvm)
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    
-    # Python (pyenv)
-    if command -v pyenv &> /dev/null; then
-        export PYENV_ROOT="$HOME/.pyenv"
-        export PATH="$PYENV_ROOT/bin:$PATH"
-        eval "$(pyenv init -)"
-    fi
-    
-    # Syntax Highlighting (must be sourced at the end)
-    # Install with: brew install zsh-syntax-highlighting
-    if [[ -f "/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-        source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    elif [[ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-        source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    fi
-    
-    # History substring search (must be after syntax highlighting)
-    # Install with: brew install zsh-history-substring-search
-    if [[ -f "/opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh" ]]; then
-        source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-        bindkey '^[[A' history-substring-search-up
-        bindkey '^[[B' history-substring-search-down
-    elif [[ -f "/usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh" ]]; then
-        source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-        bindkey '^[[A' history-substring-search-up
-        bindkey '^[[B' history-substring-search-down
     fi
     
     # Starship prompt - A blazing-fast, cross-shell prompt
@@ -386,9 +304,13 @@ fi # End of interactive-only block
 # Local Configuration Override
 # ==============================================================================
 # Source local config file if it exists (for machine-specific settings)
-# This is where you should put sensitive information like API keys
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # ==============================================================================
 # End of ~/.zshrc
 # ==============================================================================
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:$HOME/.lmstudio/bin"
+# End of LM Studio CLI section
+
